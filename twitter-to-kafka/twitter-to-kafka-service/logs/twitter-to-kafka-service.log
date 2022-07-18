@@ -1,0 +1,210 @@
+2022-07-17 16:16:43 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.twitter.app.BasicApplicationContextLoadTest], using SpringBootContextLoader
+2022-07-17 16:16:43 [main] INFO  o.s.t.c.s.AbstractContextLoader - Could not detect default resource locations for test class [com.twitter.app.BasicApplicationContextLoadTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2022-07-17 16:16:43 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.twitter.app.BasicApplicationContextLoadTest]: BasicApplicationContextLoadTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2022-07-17 16:16:43 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.twitter.app.TwitterToKafkaApp for test class com.twitter.app.BasicApplicationContextLoadTest
+2022-07-17 16:16:43 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2022-07-17 16:16:43 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@76a36b71, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@184497d1, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@f9d87b, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@6ffab045, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@26fb628, org.springframework.test.context.support.DirtiesContextTestExecutionListener@3e2943ab, org.springframework.test.context.event.EventPublishingTestExecutionListener@70dd7e15, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@4a9f80d3, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@35beb15e, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@41fe9859, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@5ac86ba5, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@6c67e137, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@2c9399a4]
+2022-07-17 16:16:44 [main] INFO  c.t.a.BasicApplicationContextLoadTest - Starting BasicApplicationContextLoadTest using Java 17.0.3.0.1 on Berkers-MBP.fritz.box with PID 6687 (started by berkerigdir in /Users/berkerigdir/twitter-app/app/twitter-to-kafka)
+2022-07-17 16:16:44 [main] INFO  c.t.a.BasicApplicationContextLoadTest - No active profile set, falling back to 1 default profile: "default"
+2022-07-17 16:16:45 [main] INFO  c.t.a.BasicApplicationContextLoadTest - Started BasicApplicationContextLoadTest in 1.504 seconds (JVM running for 2.406)
+2022-07-17 16:16:45 [main] INFO  com.twitter.app.TwitterToKafkaApp - The application starts up...
+2022-07-17 16:16:45 [main] INFO  c.t.a.s.a.i.TwitterApiStreamConnectorImpl - {
+	"delete": {
+		"values": ["Java,Spring Boot,Berker,Turkey"]
+	}
+}
+2022-07-17 16:16:46 [main] INFO  c.t.a.s.a.i.TwitterApiStreamConnectorImpl - {"meta":{"sent":"2022-07-17T14:16:46.605Z","summary":{"deleted":0,"not_deleted":1}},"errors":[{"errors":[{"parameters":{},"message":"Rule does not exist"}],"title":"Invalid Request","detail":"One or more parameters to your request was invalid.","type":"https://api.twitter.com/2/problems/invalid-request"}]}
+2022-07-17 16:16:46 [main] INFO  c.t.a.s.a.i.TwitterApiStreamConnectorImpl - {"add" : [{
+    "value": "Java",
+    "tag": "Keyword: Java"
+},{
+    "value": "Spring Boot",
+    "tag": "Keyword: Spring Boot"
+},{
+    "value": "Berker",
+    "tag": "Keyword: Berker"
+},{
+    "value": "Turkey",
+    "tag": "Keyword: Turkey"
+}]}
+
+2022-07-17 16:16:46 [main] INFO  c.t.a.s.a.i.TwitterApiStreamConnectorImpl - {"meta":{"sent":"2022-07-17T14:16:46.972Z","summary":{"created":0,"not_created":4,"valid":0,"invalid":4}},"errors":[{"value":"Java","id":"1548294593510223875","title":"DuplicateRule","type":"https://api.twitter.com/2/problems/duplicate-rules"},{"value":"Turkey","id":"1548294593510223874","title":"DuplicateRule","type":"https://api.twitter.com/2/problems/duplicate-rules"},{"value":"Spring Boot","id":"1548294593510223872","title":"DuplicateRule","type":"https://api.twitter.com/2/problems/duplicate-rules"},{"value":"Berker","id":"1548294593510223873","title":"DuplicateRule","type":"https://api.twitter.com/2/problems/duplicate-rules"}]}
+2022-07-17 16:16:47 [reactor-http-nio-2] WARN  r.n.http.client.HttpClientConnect - [419e3216-2, L:/192.168.178.24:63095 ! R:api.twitter.com/104.244.42.194:443] The connection observed an error
+reactor.netty.http.client.PrematureCloseException: Connection prematurely closed BEFORE response
+2022-07-17 16:16:47 [reactor-http-nio-2] ERROR reactor.core.publisher.Operators - Operator called default onErrorDropped
+reactor.core.Exceptions$ErrorCallbackNotImplemented: org.springframework.web.reactive.function.client.WebClientRequestException: Connection prematurely closed BEFORE response; nested exception is reactor.netty.http.client.PrematureCloseException: Connection prematurely closed BEFORE response
+Caused by: org.springframework.web.reactive.function.client.WebClientRequestException: Connection prematurely closed BEFORE response; nested exception is reactor.netty.http.client.PrematureCloseException: Connection prematurely closed BEFORE response
+	at org.springframework.web.reactive.function.client.ExchangeFunctions$DefaultExchangeFunction.lambda$wrapException$9(ExchangeFunctions.java:141)
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ? Request to GET https://api.twitter.com/2/tweets/search/stream?tweet.fields=created_at,public_metrics [DefaultWebClient]
+Original Stack Trace:
+		at org.springframework.web.reactive.function.client.ExchangeFunctions$DefaultExchangeFunction.lambda$wrapException$9(ExchangeFunctions.java:141)
+		at reactor.core.publisher.MonoErrorSupplied.subscribe(MonoErrorSupplied.java:55)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4397)
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onError(FluxOnErrorResume.java:103)
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onError(FluxPeek.java:222)
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onError(FluxPeek.java:222)
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onError(FluxPeek.java:222)
+		at reactor.core.publisher.MonoNext$NextSubscriber.onError(MonoNext.java:93)
+		at reactor.core.publisher.MonoFlatMapMany$FlatMapManyMain.onError(MonoFlatMapMany.java:204)
+		at reactor.core.publisher.SerializedSubscriber.onError(SerializedSubscriber.java:124)
+		at reactor.core.publisher.FluxRetryWhen$RetryWhenMainSubscriber.whenError(FluxRetryWhen.java:225)
+		at reactor.core.publisher.FluxRetryWhen$RetryWhenOtherSubscriber.onError(FluxRetryWhen.java:274)
+		at reactor.core.publisher.FluxConcatMap$ConcatMapImmediate.drain(FluxConcatMap.java:415)
+		at reactor.core.publisher.FluxConcatMap$ConcatMapImmediate.onNext(FluxConcatMap.java:251)
+		at reactor.core.publisher.EmitterProcessor.drain(EmitterProcessor.java:537)
+		at reactor.core.publisher.EmitterProcessor.tryEmitNext(EmitterProcessor.java:343)
+		at reactor.core.publisher.SinkManySerialized.tryEmitNext(SinkManySerialized.java:100)
+		at reactor.core.publisher.InternalManySink.emitNext(InternalManySink.java:27)
+		at reactor.core.publisher.FluxRetryWhen$RetryWhenMainSubscriber.onError(FluxRetryWhen.java:190)
+		at reactor.core.publisher.MonoCreate$DefaultMonoSink.error(MonoCreate.java:201)
+		at reactor.netty.http.client.HttpClientConnect$HttpObserver.onUncaughtException(HttpClientConnect.java:400)
+		at reactor.netty.ReactorNetty$CompositeConnectionObserver.onUncaughtException(ReactorNetty.java:670)
+		at reactor.netty.resources.DefaultPooledConnectionProvider$DisposableAcquire.onUncaughtException(DefaultPooledConnectionProvider.java:205)
+		at reactor.netty.resources.DefaultPooledConnectionProvider$PooledConnection.onUncaughtException(DefaultPooledConnectionProvider.java:454)
+		at reactor.netty.http.client.HttpClientOperations.onInboundClose(HttpClientOperations.java:294)
+		at reactor.netty.channel.ChannelOperationsHandler.channelInactive(ChannelOperationsHandler.java:73)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:262)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:248)
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelInactive(AbstractChannelHandlerContext.java:241)
+		at io.netty.channel.ChannelInboundHandlerAdapter.channelInactive(ChannelInboundHandlerAdapter.java:81)
+		at io.netty.handler.timeout.IdleStateHandler.channelInactive(IdleStateHandler.java:277)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:262)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:248)
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelInactive(AbstractChannelHandlerContext.java:241)
+		at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelInactive(CombinedChannelDuplexHandler.java:418)
+		at io.netty.handler.codec.ByteToMessageDecoder.channelInputClosed(ByteToMessageDecoder.java:392)
+		at io.netty.handler.codec.ByteToMessageDecoder.channelInactive(ByteToMessageDecoder.java:357)
+		at io.netty.handler.codec.http.HttpClientCodec$Decoder.channelInactive(HttpClientCodec.java:326)
+		at io.netty.channel.CombinedChannelDuplexHandler.channelInactive(CombinedChannelDuplexHandler.java:221)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:262)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:248)
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelInactive(AbstractChannelHandlerContext.java:241)
+		at io.netty.handler.codec.ByteToMessageDecoder.channelInputClosed(ByteToMessageDecoder.java:392)
+		at io.netty.handler.codec.ByteToMessageDecoder.channelInactive(ByteToMessageDecoder.java:357)
+		at io.netty.handler.ssl.SslHandler.channelInactive(SslHandler.java:1075)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:262)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:248)
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelInactive(AbstractChannelHandlerContext.java:241)
+		at io.netty.channel.DefaultChannelPipeline$HeadContext.channelInactive(DefaultChannelPipeline.java:1405)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:262)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:248)
+		at io.netty.channel.DefaultChannelPipeline.fireChannelInactive(DefaultChannelPipeline.java:901)
+		at io.netty.channel.AbstractChannel$AbstractUnsafe$7.run(AbstractChannel.java:813)
+		at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:174)
+		at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:167)
+		at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasksFrom(SingleThreadEventExecutor.java:426)
+		at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:375)
+		at io.netty.util.concurrent.SingleThreadEventExecutor.confirmShutdown(SingleThreadEventExecutor.java:763)
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:530)
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+		at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: reactor.netty.http.client.PrematureCloseException: Connection prematurely closed BEFORE response
+2022-07-17 16:17:50 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.twitter.app.BasicApplicationContextLoadTest], using SpringBootContextLoader
+2022-07-17 16:17:50 [main] INFO  o.s.t.c.s.AbstractContextLoader - Could not detect default resource locations for test class [com.twitter.app.BasicApplicationContextLoadTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2022-07-17 16:17:50 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.twitter.app.BasicApplicationContextLoadTest]: BasicApplicationContextLoadTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2022-07-17 16:17:50 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.twitter.app.TwitterToKafkaApp for test class com.twitter.app.BasicApplicationContextLoadTest
+2022-07-17 16:17:50 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2022-07-17 16:17:50 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@76a36b71, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@184497d1, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@f9d87b, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@6ffab045, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@26fb628, org.springframework.test.context.support.DirtiesContextTestExecutionListener@3e2943ab, org.springframework.test.context.event.EventPublishingTestExecutionListener@70dd7e15, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@4a9f80d3, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@35beb15e, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@41fe9859, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@5ac86ba5, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@6c67e137, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@2c9399a4]
+2022-07-17 16:17:50 [main] INFO  c.t.a.BasicApplicationContextLoadTest - Starting BasicApplicationContextLoadTest using Java 17.0.3.0.1 on Berkers-MBP.fritz.box with PID 6728 (started by berkerigdir in /Users/berkerigdir/twitter-app/app/twitter-to-kafka)
+2022-07-17 16:17:50 [main] INFO  c.t.a.BasicApplicationContextLoadTest - No active profile set, falling back to 1 default profile: "default"
+2022-07-17 16:17:51 [main] INFO  c.t.a.BasicApplicationContextLoadTest - Started BasicApplicationContextLoadTest in 1.467 seconds (JVM running for 2.3)
+2022-07-17 16:17:51 [main] INFO  com.twitter.app.TwitterToKafkaApp - The application starts up...
+2022-07-17 16:17:51 [main] INFO  c.t.a.s.a.i.TwitterApiStreamConnectorImpl - {
+	"delete": {
+		"values": ["Java,Spring Boot,Berker,Turkey"]
+	}
+}
+2022-07-17 16:17:52 [main] INFO  c.t.a.s.a.i.TwitterApiStreamConnectorImpl - {"meta":{"sent":"2022-07-17T14:17:53.102Z","summary":{"deleted":0,"not_deleted":1}},"errors":[{"errors":[{"parameters":{},"message":"Rule does not exist"}],"title":"Invalid Request","detail":"One or more parameters to your request was invalid.","type":"https://api.twitter.com/2/problems/invalid-request"}]}
+2022-07-17 16:17:52 [main] INFO  c.t.a.s.a.i.TwitterApiStreamConnectorImpl - {"add" : [{
+    "value": "Java",
+    "tag": "Keyword: Java"
+},{
+    "value": "Spring Boot",
+    "tag": "Keyword: Spring Boot"
+},{
+    "value": "Berker",
+    "tag": "Keyword: Berker"
+},{
+    "value": "Turkey",
+    "tag": "Keyword: Turkey"
+}]}
+
+2022-07-17 16:17:53 [main] INFO  c.t.a.s.a.i.TwitterApiStreamConnectorImpl - {"meta":{"sent":"2022-07-17T14:17:53.497Z","summary":{"created":0,"not_created":4,"valid":0,"invalid":4}},"errors":[{"value":"Java","id":"1548294593510223875","title":"DuplicateRule","type":"https://api.twitter.com/2/problems/duplicate-rules"},{"value":"Turkey","id":"1548294593510223874","title":"DuplicateRule","type":"https://api.twitter.com/2/problems/duplicate-rules"},{"value":"Spring Boot","id":"1548294593510223872","title":"DuplicateRule","type":"https://api.twitter.com/2/problems/duplicate-rules"},{"value":"Berker","id":"1548294593510223873","title":"DuplicateRule","type":"https://api.twitter.com/2/problems/duplicate-rules"}]}
+2022-07-17 16:17:53 [reactor-http-nio-2] WARN  r.n.http.client.HttpClientConnect - [fa97f866-2, L:/192.168.178.24:63109 ! R:api.twitter.com/104.244.42.194:443] The connection observed an error
+reactor.netty.http.client.PrematureCloseException: Connection prematurely closed BEFORE response
+2022-07-17 16:17:53 [reactor-http-nio-2] ERROR reactor.core.publisher.Operators - Operator called default onErrorDropped
+reactor.core.Exceptions$ErrorCallbackNotImplemented: org.springframework.web.reactive.function.client.WebClientRequestException: Connection prematurely closed BEFORE response; nested exception is reactor.netty.http.client.PrematureCloseException: Connection prematurely closed BEFORE response
+Caused by: org.springframework.web.reactive.function.client.WebClientRequestException: Connection prematurely closed BEFORE response; nested exception is reactor.netty.http.client.PrematureCloseException: Connection prematurely closed BEFORE response
+	at org.springframework.web.reactive.function.client.ExchangeFunctions$DefaultExchangeFunction.lambda$wrapException$9(ExchangeFunctions.java:141)
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ? Request to GET https://api.twitter.com/2/tweets/search/stream?tweet.fields=created_at,public_metrics [DefaultWebClient]
+Original Stack Trace:
+		at org.springframework.web.reactive.function.client.ExchangeFunctions$DefaultExchangeFunction.lambda$wrapException$9(ExchangeFunctions.java:141)
+		at reactor.core.publisher.MonoErrorSupplied.subscribe(MonoErrorSupplied.java:55)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4397)
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onError(FluxOnErrorResume.java:103)
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onError(FluxPeek.java:222)
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onError(FluxPeek.java:222)
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onError(FluxPeek.java:222)
+		at reactor.core.publisher.MonoNext$NextSubscriber.onError(MonoNext.java:93)
+		at reactor.core.publisher.MonoFlatMapMany$FlatMapManyMain.onError(MonoFlatMapMany.java:204)
+		at reactor.core.publisher.SerializedSubscriber.onError(SerializedSubscriber.java:124)
+		at reactor.core.publisher.FluxRetryWhen$RetryWhenMainSubscriber.whenError(FluxRetryWhen.java:225)
+		at reactor.core.publisher.FluxRetryWhen$RetryWhenOtherSubscriber.onError(FluxRetryWhen.java:274)
+		at reactor.core.publisher.FluxConcatMap$ConcatMapImmediate.drain(FluxConcatMap.java:415)
+		at reactor.core.publisher.FluxConcatMap$ConcatMapImmediate.onNext(FluxConcatMap.java:251)
+		at reactor.core.publisher.EmitterProcessor.drain(EmitterProcessor.java:537)
+		at reactor.core.publisher.EmitterProcessor.tryEmitNext(EmitterProcessor.java:343)
+		at reactor.core.publisher.SinkManySerialized.tryEmitNext(SinkManySerialized.java:100)
+		at reactor.core.publisher.InternalManySink.emitNext(InternalManySink.java:27)
+		at reactor.core.publisher.FluxRetryWhen$RetryWhenMainSubscriber.onError(FluxRetryWhen.java:190)
+		at reactor.core.publisher.MonoCreate$DefaultMonoSink.error(MonoCreate.java:201)
+		at reactor.netty.http.client.HttpClientConnect$HttpObserver.onUncaughtException(HttpClientConnect.java:400)
+		at reactor.netty.ReactorNetty$CompositeConnectionObserver.onUncaughtException(ReactorNetty.java:670)
+		at reactor.netty.resources.DefaultPooledConnectionProvider$DisposableAcquire.onUncaughtException(DefaultPooledConnectionProvider.java:205)
+		at reactor.netty.resources.DefaultPooledConnectionProvider$PooledConnection.onUncaughtException(DefaultPooledConnectionProvider.java:454)
+		at reactor.netty.http.client.HttpClientOperations.onInboundClose(HttpClientOperations.java:294)
+		at reactor.netty.channel.ChannelOperationsHandler.channelInactive(ChannelOperationsHandler.java:73)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:262)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:248)
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelInactive(AbstractChannelHandlerContext.java:241)
+		at io.netty.channel.ChannelInboundHandlerAdapter.channelInactive(ChannelInboundHandlerAdapter.java:81)
+		at io.netty.handler.timeout.IdleStateHandler.channelInactive(IdleStateHandler.java:277)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:262)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:248)
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelInactive(AbstractChannelHandlerContext.java:241)
+		at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelInactive(CombinedChannelDuplexHandler.java:418)
+		at io.netty.handler.codec.ByteToMessageDecoder.channelInputClosed(ByteToMessageDecoder.java:392)
+		at io.netty.handler.codec.ByteToMessageDecoder.channelInactive(ByteToMessageDecoder.java:357)
+		at io.netty.handler.codec.http.HttpClientCodec$Decoder.channelInactive(HttpClientCodec.java:326)
+		at io.netty.channel.CombinedChannelDuplexHandler.channelInactive(CombinedChannelDuplexHandler.java:221)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:262)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:248)
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelInactive(AbstractChannelHandlerContext.java:241)
+		at io.netty.handler.codec.ByteToMessageDecoder.channelInputClosed(ByteToMessageDecoder.java:392)
+		at io.netty.handler.codec.ByteToMessageDecoder.channelInactive(ByteToMessageDecoder.java:357)
+		at io.netty.handler.ssl.SslHandler.channelInactive(SslHandler.java:1075)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:262)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:248)
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelInactive(AbstractChannelHandlerContext.java:241)
+		at io.netty.channel.DefaultChannelPipeline$HeadContext.channelInactive(DefaultChannelPipeline.java:1405)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:262)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:248)
+		at io.netty.channel.DefaultChannelPipeline.fireChannelInactive(DefaultChannelPipeline.java:901)
+		at io.netty.channel.AbstractChannel$AbstractUnsafe$7.run(AbstractChannel.java:813)
+		at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:174)
+		at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:167)
+		at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasksFrom(SingleThreadEventExecutor.java:426)
+		at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:375)
+		at io.netty.util.concurrent.SingleThreadEventExecutor.confirmShutdown(SingleThreadEventExecutor.java:763)
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:530)
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+		at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: reactor.netty.http.client.PrematureCloseException: Connection prematurely closed BEFORE response
