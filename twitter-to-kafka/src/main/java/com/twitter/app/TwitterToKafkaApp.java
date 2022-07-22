@@ -1,5 +1,6 @@
 package com.twitter.app;
 
+//import com.twitter.app.client.KafkaAdminClient;
 import com.twitter.app.streamcreator.apiconnector.TwitterApiStreamConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +16,10 @@ public class TwitterToKafkaApp implements CommandLineRunner {
     Logger logger = LoggerFactory.getLogger(TwitterToKafkaApp.class);
 
     private final TwitterApiStreamConnector twitterApiStreamConnector;
-
+//    private final KafkaAdminClient kafkaAdminClient;
     public TwitterToKafkaApp(TwitterApiStreamConnector twitterApiStreamConnector) {
         this.twitterApiStreamConnector = twitterApiStreamConnector;
+//        this.kafkaAdminClient = kafkaAdminClient;
     }
 
     public static void main(String[] args) {

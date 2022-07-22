@@ -3,14 +3,12 @@ package com.twitter.app.retry;
 import com.twitter.app.config.RetryConfigProperties;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.retry.backoff.ExponentialBackOffPolicy;
 import org.springframework.retry.policy.SimpleRetryPolicy;
 import org.springframework.retry.support.RetryTemplate;
 
 @Configuration
-//@ComponentScan(basePackages = "com.twitter")
 public class RetryConfig {
     private final RetryConfigProperties retryConfigProperties;
 

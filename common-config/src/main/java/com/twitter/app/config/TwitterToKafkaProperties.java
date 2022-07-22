@@ -11,6 +11,7 @@ import java.util.List;
 public class TwitterToKafkaProperties {
     private List<String> keywords;
     private List<String> fields;
+    private List<String> expansions;
     private String bearerToken;
     private String twitterStreamUrl;
 
@@ -44,5 +45,13 @@ public class TwitterToKafkaProperties {
 
     public void setFields(List<String> fields) {
         this.fields = fields;
+    }
+
+    public List<String> getExpansions() {
+        return expansions;
+    }
+
+    public void setExpansions(List<String> expansions) {
+        this.expansions = expansions;
     }
 }

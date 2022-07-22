@@ -7,9 +7,12 @@ import org.apache.kafka.clients.admin.CreateTopicsResult;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.retry.RetryContext;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
@@ -34,6 +37,25 @@ public class KafkaAdminClient {
 
         this.webClient = webClientBuilder.baseUrl(kafkaConfigData.getSchemaRegistryUrl()).build();
     }
+
+
+    public void createAvroSchema() {
+        retryTemplate.execute(this::retryCreateAvroSchema);
+    }
+
+    private boolean retryCreateAvroSchema(RetryContext retryContext) {
+
+        LOG.info("Creating avro schema, retry attempt:{}", retryContext.getRetryCount());
+
+        return Boolean.TRUE.equals(webClient.get()
+                .retrieve()
+                .onStatus(HttpStatus::is4xxClientError, ClientResponse::createException)
+                .onStatus(HttpStatus::is5xxServerError, ClientResponse::createException)
+                .toBodilessEntity()
+                .map(e -> e.getStatusCode() == HttpStatus.OK)
+                .block());
+    }
+
     public void createTopics() {
         retryTemplate.execute(this::retryCreateTopics);
         try {

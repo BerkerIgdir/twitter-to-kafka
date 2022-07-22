@@ -1,5 +1,11 @@
 package com.twitter.app.httpclienttests;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.twitter.app.streamcreator.apiconnector.impl.TwitterApiStreamConnectorImpl;
 import io.netty.channel.ChannelOption;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -20,10 +26,16 @@ import javax.annotation.PostConstruct;
 import java.net.URI;
 import java.time.Duration;
 
-//@SpringBootTest
+@SpringBootTest
 class WebClientTDD {
     private static final Logger LOG = LoggerFactory.getLogger(WebClientTDD.class);
-
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    private record TwitterDto(@JsonProperty("id") long id, @JsonProperty("author_id") long userId,
+                              @JsonProperty("created_at") String createdAt, @JsonProperty("text") String text) {
+    }
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    private record dataDto(TwitterDto data){}
+    private final ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
     private static final String TWITTER_BASE_STREAM_URL = "https://api.twitter.com/2/tweets/search/stream";
     private static final String RULES_URI = "/rules";
     private static final String ADD_RULES_BODY_TEMPLATE = """
@@ -62,7 +74,14 @@ class WebClientTDD {
                 .retrieve()
                 .onStatus(HttpStatus::is4xxClientError, ClientResponse::createException)
                 .bodyToFlux(String.class)
-                .subscribe(LOG::info);
+                .map(str -> {
+                    try {
+                        return objectMapper.readValue(str, TwitterDto.class);
+                    } catch (JsonProcessingException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .subscribe(dto -> LOG.info(dto.toString()));
 
         wait();
     }

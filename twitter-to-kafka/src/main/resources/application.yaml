@@ -4,6 +4,8 @@ twitter-app:
   fields:
     - created_at
     - public_metrics
+  expansions:
+    - author_id
   keywords:
     - Java
     - Spring Boot
