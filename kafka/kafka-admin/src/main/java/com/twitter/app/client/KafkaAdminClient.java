@@ -39,7 +39,20 @@ public class KafkaAdminClient {
     }
 
 
-    public void createAvroSchema() {
+    public void createAvroSchema() throws InterruptedException {
+        int maxRetry = retryConfig.getMaxAttempts();
+        int currentRetry = 1;
+        long sleepTime = retryConfig.getSleepTimeMs();
+        double multiplier = retryConfig.getMultiplier();
+        while (Boolean.FALSE    .equals(retryTemplate.execute(this::retryCreateAvroSchema))) {
+            if (currentRetry > maxRetry) {
+                throw new RuntimeException();
+            }
+
+            currentRetry++;
+            Thread.sleep(sleepTime);
+            sleepTime *= multiplier;
+        }
         retryTemplate.execute(this::retryCreateAvroSchema);
     }
 
