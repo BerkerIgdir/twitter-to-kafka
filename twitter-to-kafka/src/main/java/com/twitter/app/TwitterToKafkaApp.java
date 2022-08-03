@@ -7,13 +7,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.event.EventListener;
+
+import java.util.Arrays;
+
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.twitter")
 public class TwitterToKafkaApp implements CommandLineRunner {
 
-    Logger logger = LoggerFactory.getLogger(TwitterToKafkaApp.class);
+    Logger LOG = LoggerFactory.getLogger(TwitterToKafkaApp.class);
 
     private final TwitterApiStreamConnector twitterApiStreamConnector;
     private final KafkaAdminClient kafkaAdminClient;
@@ -28,9 +33,15 @@ public class TwitterToKafkaApp implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        logger.info("The application starts up...");
+        LOG.info("The application starts up...");
         kafkaAdminClient.createTopics();
         kafkaAdminClient.createAvroSchema();
         twitterApiStreamConnector.connectStream();
     }
+
+    @EventListener
+    public void start(ApplicationStartedEvent event){
+        Arrays.stream(event.getApplicationContext().getBeanDefinitionNames()).forEach(LOG::info);
+    }
+
 }

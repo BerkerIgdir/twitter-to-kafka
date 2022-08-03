@@ -1,6 +1,5 @@
 package com.twitter.kafka.producer.impl;
 
-import com.twitter.app.config.KafkaConfigProperties;
 import com.twitter.app.kafka.avro.model.TwitterAvroModel;
 import com.twitter.kafka.producer.TwitterToKafkaProducer;
 import org.apache.kafka.clients.producer.RecordMetadata;

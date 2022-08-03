@@ -7,6 +7,7 @@ import org.apache.kafka.clients.admin.CreateTopicsResult;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.retry.RetryContext;
@@ -44,7 +45,7 @@ public class KafkaAdminClient {
         int currentRetry = 1;
         long sleepTime = retryConfig.getSleepTimeMs();
         double multiplier = retryConfig.getMultiplier();
-        while (Boolean.FALSE    .equals(retryTemplate.execute(this::retryCreateAvroSchema))) {
+        while (Boolean.FALSE.equals(retryTemplate.execute(this::retryCreateAvroSchema))) {
             if (currentRetry > maxRetry) {
                 throw new RuntimeException();
             }
@@ -102,7 +103,7 @@ public class KafkaAdminClient {
         return adminClient.createTopics(kafkaTopics);
     }
 
-    private boolean isTopicsCreated() {
+    public boolean isTopicsCreated() {
         return retryTemplate.execute(this::retryIsTopicsCreated);
     }
 

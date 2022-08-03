@@ -11,6 +11,12 @@
         <module>kafka/kafka-admin</module>
         <module>kafka/kafka-model</module>
         <module>kafka/kafka-producer</module>
+        <module>elasticsearch</module>
+        <module>elasticsearch/elastic-client</module>
+        <module>elasticsearch/elastic-config</module>
+        <module>kafka/kafka-consumer</module>
+        <module>elasticsearch/elastic-model</module>
+        <module>kafka-to-elastic</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -31,6 +37,8 @@
         <avro-model.version>1.10.0</avro-model.version>
         <kafka-avro-serializer.version>7.2.0</kafka-avro-serializer.version>
         <jackson-databind.version>2.12.0</jackson-databind.version>
+        <spring-elastic.version>4.4.2</spring-elastic.version>
+        <elastic.version>7.17.4</elastic.version>
     </properties>
     <repositories>
         <repository>
@@ -98,6 +106,11 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.twitter</groupId>
+                <artifactId>kafka-consumer</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework.retry</groupId>
                 <artifactId>spring-retry</artifactId>
                 <version>${spring-retry.version}</version>
@@ -151,6 +164,43 @@
                         <artifactId>swagger-core</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-elasticsearch -->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-elasticsearch</artifactId>
+                <version>${spring-elastic.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.twitter</groupId>
+                <artifactId>elastic-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.twitter</groupId>
+                <artifactId>elastic-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.twitter</groupId>
+                <artifactId>elastic-config</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${elastic.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${elastic.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${elastic.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

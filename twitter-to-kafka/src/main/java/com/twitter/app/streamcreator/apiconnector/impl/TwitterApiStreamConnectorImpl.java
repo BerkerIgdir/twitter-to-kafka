@@ -9,11 +9,12 @@ import com.twitter.app.config.KafkaConfigProperties;
 import com.twitter.app.config.TwitterToKafkaProperties;
 import com.twitter.app.kafka.avro.model.TwitterAvroModel;
 import com.twitter.app.streamcreator.apiconnector.TwitterApiStreamConnector;
-import com.twitter.app.transformer.TwitterAppTransformer;
+import com.twitter.app.converter.DtoToAvroTransformer;
 import com.twitter.kafka.producer.TwitterToKafkaProducer;
 import io.netty.channel.ChannelOption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
@@ -26,11 +27,16 @@ import reactor.netty.http.client.HttpClient;
 
 import java.net.URI;
 import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
 import static com.twitter.app.streamcreator.apiconnector.TwitterApiConstants.*;
 
 @Service
+@Profile("dev")
 public class TwitterApiStreamConnectorImpl implements TwitterApiStreamConnector {
     private static final Logger LOG = LoggerFactory.getLogger(TwitterApiStreamConnectorImpl.class);
 
@@ -43,7 +49,9 @@ public class TwitterApiStreamConnectorImpl implements TwitterApiStreamConnector 
     public record DataDto(TwitterDto data) {
     }
 
-    private final DataDto JACKSON_FAIL_DTO_RESPONSE = new DataDto(new TwitterDto(Long.MAX_VALUE, Long.MAX_VALUE, "", ""));
+    private final DataDto JACKSON_FAIL_DTO_RESPONSE = new DataDto(new TwitterDto(Long.MAX_VALUE, Long.MAX_VALUE,
+            Instant.now().atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ISO_INSTANT),
+            "Empty Text"));
 
     private final ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
     private final TwitterToKafkaProperties properties;
@@ -51,16 +59,17 @@ public class TwitterApiStreamConnectorImpl implements TwitterApiStreamConnector 
     private final WebClient webClient;
     private final TwitterToKafkaProducer<Long, TwitterAvroModel> kafkaProducer;
 
-    private final TwitterAppTransformer<TwitterAvroModel,DataDto> dataDtoTwitterAppTransformer;
+    private final DtoToAvroTransformer<TwitterAvroModel, DataDto> dataDtoDtoToAvroTransformer;
 
-    public TwitterApiStreamConnectorImpl(TwitterToKafkaProperties properties, KafkaConfigProperties kafkaConfigData, WebClient.Builder webClientBuilder, TwitterToKafkaProducer<Long, TwitterAvroModel> kafkaProducer, TwitterAppTransformer<TwitterAvroModel, DataDto> dataDtoTwitterAppTransformer) {
+    public TwitterApiStreamConnectorImpl(TwitterToKafkaProperties properties, KafkaConfigProperties kafkaConfigData, WebClient.Builder webClientBuilder, TwitterToKafkaProducer<Long, TwitterAvroModel> kafkaProducer, DtoToAvroTransformer<TwitterAvroModel, DataDto> dataDtoDtoToAvroTransformer) {
         this.properties = properties;
         this.kafkaConfigData = kafkaConfigData;
         this.kafkaProducer = kafkaProducer;
-        this.dataDtoTwitterAppTransformer = dataDtoTwitterAppTransformer;
+        this.dataDtoDtoToAvroTransformer = dataDtoDtoToAvroTransformer;
         HttpClient httpClient = HttpClient.create()
                 .responseTimeout(Duration.ofSeconds(30))
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, ((int) Duration.ofSeconds(30).toMillis()));
+
         webClient = webClientBuilder
                 .clientConnector(new ReactorClientHttpConnector(httpClient))
                 .baseUrl(properties.getTwitterStreamUrl())
@@ -79,7 +88,7 @@ public class TwitterApiStreamConnectorImpl implements TwitterApiStreamConnector 
                 .onStatus(HttpStatus::is4xxClientError, ClientResponse::createException)
                 .bodyToFlux(String.class)
                 .map(this::fromStringToDTO)
-                .subscribe(dto -> kafkaProducer.send(topicName, dto.data().id, dataDtoTwitterAppTransformer.transform(dto)));
+                .subscribe(dto -> kafkaProducer.send(topicName, dto.data().id, dataDtoDtoToAvroTransformer.transform(dto)));
     }
 
     private DataDto fromStringToDTO(String str) {
