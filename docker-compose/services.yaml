@@ -19,6 +19,7 @@ services:
       - "KAFKA-CONFIG_TOPIC-NAME=twitter-topic"
       - "KAFKA-CONFIG_BOOTSTRAP-SERVERS=kafka-broker-1:9092, kafka-broker-2:9092, kafka-broker-3:9092"
       - "KAFKA-CONFIG_SCHEMA-REGISTRY-URL=http://schema-registry:8081"
+      - "SPRING_CLOUD_CONFIG_URI=http://config-service:8888"
     networks:
       - ${GLOBAL_NETWORK:-services}
   kafka-to-elastic-service:
@@ -30,7 +31,7 @@ services:
       - "./docker-logs:/workspace/kafka-to-elastic-service/logs"
       - "./check-elastic-cluster-up.sh:/usr/local/bin/check-elastic-cluster-up.sh"
     user: root
-    entrypoint: ["check-elastic-cluster-up.sh"]
+    entrypoint: [ "check-elastic-cluster-up.sh" ]
     depends_on:
       - kafka-broker-1
       - kafka-broker-2
@@ -46,5 +47,6 @@ services:
       - "KAFKA-CONFIG_TOPIC-NAME=twitter-topic"
       - "KAFKA-CONFIG_BOOTSTRAP-SERVERS=kafka-broker-1:9092, kafka-broker-2:9092, kafka-broker-3:9092"
       - "KAFKA-CONFIG_SCHEMA-REGISTRY-URL=http://schema-registry:8081"
+      - "SPRING_CLOUD_CONFIG_URI=http://config-service:8888"
     networks:
       - ${GLOBAL_NETWORK:-services}

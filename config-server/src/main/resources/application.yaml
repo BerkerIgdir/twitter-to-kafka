@@ -1,2 +1,24 @@
 server:
   port: 8888
+
+logging:
+  level:
+    ROOT: INFO
+    org.spring.framework.cloud.config: DEBUG
+spring:
+  application:
+    name: configserver
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/BerkerIgdir/twitter-kafka-repo
+          clone-on-start: true
+          username: BerkerIgdir
+          password: "(cipher)5ccc52495d5b48353b63534e6f9dfc970ecc5817f66cfad69585cc75b9ac62a0"
+          default-label: main
+      fail-fast: true
+  security:
+    user:
+      name: spring_cloud_user
+      password: "(cipher)b205ecb33308cd4fffde0ca4f8f8c23ab1c9cc98dcbc25344154fa840490a178"
