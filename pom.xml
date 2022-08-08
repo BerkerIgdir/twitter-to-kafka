@@ -18,6 +18,7 @@
         <module>elasticsearch/elastic-model</module>
         <module>kafka-to-elastic</module>
         <module>config-server</module>
+        <module>elastic-query-service</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -177,6 +178,11 @@
             <dependency>
                 <groupId>com.twitter</groupId>
                 <artifactId>elastic-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.twitter</groupId>
+                <artifactId>elastic-query-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

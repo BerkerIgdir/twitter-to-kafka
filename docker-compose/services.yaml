@@ -5,16 +5,18 @@ services:
     ports:
       - "5005:5005"
     volumes:
-      - "./docker-logs:/workspace/kafka-to-elastic-service/logs"
+      - "./docker-logs:/workspace/twitter-to-kafka-service/logs"
       - "./check-elastic-cluster-up.sh:/usr/local/bin/check-elastic-cluster-up.sh"
     user: root
+    entrypoint: [ "check-elastic-cluster-up.sh" ]
     depends_on:
+      - config-service
       - kafka-broker-1
       - kafka-broker-2
       - kafka-broker-3
     environment:
       - "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Xms128m -Xmx256m"
-      - "LOGGING_LEVEL_COM_MICROSERVICES_DEMO=info"
+      - "LOGGING_LEVEL_COM_TWITTER=info"
       - "LOGGING_LEVEL_ROOT=info"
       - "KAFKA-CONFIG_TOPIC-NAME=twitter-topic"
       - "KAFKA-CONFIG_BOOTSTRAP-SERVERS=kafka-broker-1:9092, kafka-broker-2:9092, kafka-broker-3:9092"
@@ -33,6 +35,7 @@ services:
     user: root
     entrypoint: [ "check-elastic-cluster-up.sh" ]
     depends_on:
+      - config-service
       - kafka-broker-1
       - kafka-broker-2
       - kafka-broker-3
@@ -41,7 +44,7 @@ services:
       - elastic-3
     environment:
       - "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5050 -Xms128m -Xmx256m"
-      - "LOGGING_LEVEL_COM_MICROSERVICES_DEMO=info"
+      - "LOGGING_LEVEL_COM_TWITTER=info"
       - "LOGGING_LEVEL_ROOT=info"
       - "ELASTIC-CONFIG_CONNECTION-URL=http://elastic-1:9200"
       - "KAFKA-CONFIG_TOPIC-NAME=twitter-topic"

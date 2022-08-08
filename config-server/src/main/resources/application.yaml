@@ -21,4 +21,7 @@ spring:
   security:
     user:
       name: spring_cloud_user
-      password: "(cipher)b205ecb33308cd4fffde0ca4f8f8c23ab1c9cc98dcbc25344154fa840490a178"
+      password: "(cipher)8289224e8c63a064873a230458a40b8201d284d8d4eb0bcb3bea87b14b06d10e"
+#        "(cipher)8289224e8c63a064873a230458a40b8201d284d8d4eb0bcb3bea87b14b06d10e"
+encrypt:
+  key: berkerBaBa5
