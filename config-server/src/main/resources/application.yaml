@@ -24,4 +24,4 @@ spring:
       password: "(cipher)8289224e8c63a064873a230458a40b8201d284d8d4eb0bcb3bea87b14b06d10e"
 #        "(cipher)8289224e8c63a064873a230458a40b8201d284d8d4eb0bcb3bea87b14b06d10e"
 encrypt:
-  key: berkerBaBa5
+  key: $(CONFIG_CLIENT_KEY)
