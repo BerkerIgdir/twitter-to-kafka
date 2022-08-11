@@ -3,7 +3,7 @@ package com.twitter.elastic.consumer;
 import com.twitter.elastic.config.KafkaConfigPropertiesForConsumer;
 import com.twitter.elastic.config.KafkaConsumerProperties;
 import com.twitter.app.kafka.avro.model.TwitterAvroModel;
-import com.twitter.client.TwitterApiConsumerClient;
+import com.twitter.elastic.client.TwitterApiConsumerClient;
 import com.twitter.elastic.KafkaToTwitterElasticClient;
 import com.twitter.elastic.converter.AvroToElasticIndexConverter;
 import com.twitter.elastic.model.TwitterIndexModel;

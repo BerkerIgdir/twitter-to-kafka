@@ -4,6 +4,8 @@ import com.twitter.elastic.query.dto.ElasticQueryServiceResponseModel;
 import com.twitter.elastic.query.service.ElasticSearchQueryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,7 +19,12 @@ public class ElasticSearchQueryServiceRestController {
     }
 
     @GetMapping("/match-all")
-    ResponseEntity<List<ElasticQueryServiceResponseModel>> matchAll() {
+    public ResponseEntity<List<ElasticQueryServiceResponseModel>> matchAll() {
         return ResponseEntity.ok(queryService.getAllTweetModels());
+    }
+
+    @GetMapping("/match-by-text")
+    public ResponseEntity<List<ElasticQueryServiceResponseModel>> matchByText(@RequestParam("text")String text) {
+        return ResponseEntity.ok(queryService.getTweetsByText(text));
     }
 }

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ElasticSearchQueryService {
      List<ElasticQueryServiceResponseModel> getAllTweetModels();
+     List<ElasticQueryServiceResponseModel> getTweetsByText(String text);
 }

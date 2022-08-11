@@ -1,7 +1,5 @@
-package com.twitter.config;
+package com.twitter.elastic.config;
 
-import com.twitter.app.config.KafkaConfigProperties;
-import com.twitter.elastic.config.KafkaConsumerProperties;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.springframework.context.annotation.Bean;
@@ -21,9 +19,9 @@ import java.util.Map;
 @Configuration
 public class KafkaConsumerConfig<K extends Serializable, T extends SpecificRecordBase> {
     private final KafkaConsumerProperties kafkaConsumerProperties;
-    private final KafkaConfigProperties kafkaConfigProperties;
+    private final KafkaConfigPropertiesForConsumer kafkaConfigProperties;
 
-    public KafkaConsumerConfig(KafkaConsumerProperties kafkaConsumerProperties, KafkaConfigProperties kafkaConfigProperties) {
+    public KafkaConsumerConfig(KafkaConsumerProperties kafkaConsumerProperties, KafkaConfigPropertiesForConsumer kafkaConfigProperties) {
         this.kafkaConsumerProperties = kafkaConsumerProperties;
         this.kafkaConfigProperties = kafkaConfigProperties;
     }

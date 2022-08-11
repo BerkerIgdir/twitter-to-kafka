@@ -1,4 +1,4 @@
-package com.twitter.client;
+package com.twitter.elastic.client;
 
 import org.apache.avro.specific.SpecificRecordBase;
 

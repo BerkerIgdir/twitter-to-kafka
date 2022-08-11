@@ -30,4 +30,13 @@ public class DefaultElasticSearchQueryServiceImpl implements ElasticSearchQueryS
                .map(twitterModelIndexToQueryServiceResponseConverter::convert)
                .toList();
     }
+
+    @Override
+    public List<ElasticQueryServiceResponseModel> getTweetsByText(String text) {
+        return elasticSearchQueryClient.getTweetModelsByContent(text)
+                .stream()
+                .map(twitterModelIndexToQueryServiceResponseConverter::convert)
+                .toList();
+    }
+
 }
