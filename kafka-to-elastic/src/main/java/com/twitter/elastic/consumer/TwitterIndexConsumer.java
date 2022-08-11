@@ -31,7 +31,7 @@ public class TwitterIndexConsumer implements TwitterApiConsumerClient<TwitterAvr
     }
 
     @Override
-    @KafkaListener(id = "#{kafkaConsumerProperties.consumerGroupId}", topics = "#{kafkaConfigProperties.topicName}")
+    @KafkaListener(id = "#{kafkaConsumerProperties.consumerGroupId}", topics = "#{kafkaConfigPropertiesForConsumer.topicName}")
     public void listen(TwitterAvroModel recordBase) {
         kafkaToTwitterElasticClient.save(toElasticIndexConverter.convert(recordBase));
     }
