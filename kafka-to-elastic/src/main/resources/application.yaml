@@ -1,3 +1,5 @@
+encrypt:
+  key: berkerBaBa5
 spring:
   application:
     name: kafka-to-elastic-service
@@ -9,7 +11,7 @@ spring:
     config:
       name: kafka-to-elastic-service,config-client
       username: spring_cloud_user
-      password: "(cipher)8289224e8c63a064873a230458a40b8201d284d8d4eb0bcb3bea87b14b06d10e"
+      password: "{cipher}b070010b6ea5ff61dd83f4013184f73251e5d16ace7ef627faae5fe7c81f2b90"
 
 log:
   app-name: kafka-to-elastic-service

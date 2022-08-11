@@ -15,13 +15,15 @@ spring:
           uri: https://github.com/BerkerIgdir/twitter-kafka-repo
           clone-on-start: true
           username: BerkerIgdir
-          password: "(cipher)5ccc52495d5b48353b63534e6f9dfc970ecc5817f66cfad69585cc75b9ac62a0"
+          password: "{cipher}1aa97a8fb79a3a536a1c1f725d554ee687e5a162bdbf79755822bda794fa337d4838483db09ac10b4cd5ed5744da8f7016686c1e01f5d875eaa3166898a2f312"
           default-label: main
+        encrypt:
+          enabled: true
       fail-fast: true
   security:
     user:
       name: spring_cloud_user
-      password: "(cipher)8289224e8c63a064873a230458a40b8201d284d8d4eb0bcb3bea87b14b06d10e"
-#        "(cipher)8289224e8c63a064873a230458a40b8201d284d8d4eb0bcb3bea87b14b06d10e"
+      password: "{cipher}b070010b6ea5ff61dd83f4013184f73251e5d16ace7ef627faae5fe7c81f2b90"
+#        "{cipher}b070010b6ea5ff61dd83f4013184f73251e5d16ace7ef627faae5fe7c81f2b90"
 encrypt:
-  key: $(CONFIG_CLIENT_KEY)
+  key: ${CONFIG_CLIENT_KEY}

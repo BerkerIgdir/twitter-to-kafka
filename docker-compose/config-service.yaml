@@ -8,6 +8,7 @@ services:
     networks:
       - ${GLOBAL_NETWORK:-services}
     volumes:
-      - "./docker-logs:/workspace/config-server/logs"
+      - "./docker-logs:/workspace/config-service/logs"
     environment:
       - "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Xms128m -Xmx256m"
+      - "ENCRYPT_KEY=${CONFIG_CLIENT_KEY}"

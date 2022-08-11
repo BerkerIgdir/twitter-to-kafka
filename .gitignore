@@ -34,3 +34,4 @@ build/
 /twitter-to-kafka-service/
 /.mvn/
 /docker-compose/docker-logs/
+/kafka-to-elastic-service/

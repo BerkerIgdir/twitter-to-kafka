@@ -1,6 +1,8 @@
 package com.twitter.app;
 
 import com.twitter.app.client.KafkaAdminClient;
+import com.twitter.app.config.KafkaConfigProperties;
+import com.twitter.app.config.TwitterToKafkaProperties;
 import com.twitter.app.streamcreator.apiconnector.TwitterApiStreamConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +24,11 @@ public class TwitterToKafkaApp implements CommandLineRunner {
 
     private final TwitterApiStreamConnector twitterApiStreamConnector;
     private final KafkaAdminClient kafkaAdminClient;
-    public TwitterToKafkaApp(TwitterApiStreamConnector twitterApiStreamConnector, KafkaAdminClient kafkaAdminClient) {
+    private final TwitterToKafkaProperties properties;
+    public TwitterToKafkaApp(TwitterApiStreamConnector twitterApiStreamConnector, KafkaAdminClient kafkaAdminClient, TwitterToKafkaProperties properties) {
         this.twitterApiStreamConnector = twitterApiStreamConnector;
         this.kafkaAdminClient = kafkaAdminClient;
+        this.properties = properties;
     }
 
     public static void main(String[] args) {
@@ -34,6 +38,7 @@ public class TwitterToKafkaApp implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         LOG.info("The application starts up...");
+        LOG.info("THE BEARER TOKEN IS:{}",properties.getBearerToken());
         kafkaAdminClient.createTopics();
         kafkaAdminClient.createAvroSchema();
         twitterApiStreamConnector.connectStream();

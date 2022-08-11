@@ -1,6 +1,6 @@
 package com.twitter.elastic.consumer;
 
-import com.twitter.app.config.KafkaConfigProperties;
+import com.twitter.elastic.config.KafkaConfigPropertiesForConsumer;
 import com.twitter.elastic.config.KafkaConsumerProperties;
 import com.twitter.app.kafka.avro.model.TwitterAvroModel;
 import com.twitter.client.TwitterApiConsumerClient;
@@ -16,16 +16,16 @@ import org.springframework.stereotype.Service;
 public class TwitterIndexConsumer implements TwitterApiConsumerClient<TwitterAvroModel> {
 
     private final KafkaConsumerProperties kafkaConsumerProperties;
-    private final KafkaConfigProperties kafkaConfigProperties;
+    private final KafkaConfigPropertiesForConsumer kafkaConfigPropertiesForConsumer;
     private final KafkaToTwitterElasticClient<TwitterIndexModel> kafkaToTwitterElasticClient;
     private final AvroToElasticIndexConverter<TwitterAvroModel, TwitterIndexModel> toElasticIndexConverter;
 
     public TwitterIndexConsumer(KafkaConsumerProperties kafkaConsumerProperties,
-                                KafkaConfigProperties kafkaConfigProperties,
+                                KafkaConfigPropertiesForConsumer kafkaConfigPropertiesForConsumer,
                                 KafkaToTwitterElasticClient<TwitterIndexModel> kafkaToTwitterElasticClient,
                                 AvroToElasticIndexConverter<TwitterAvroModel, TwitterIndexModel> toElasticIndexConverter) {
         this.kafkaConsumerProperties = kafkaConsumerProperties;
-        this.kafkaConfigProperties = kafkaConfigProperties;
+        this.kafkaConfigPropertiesForConsumer = kafkaConfigPropertiesForConsumer;
         this.kafkaToTwitterElasticClient = kafkaToTwitterElasticClient;
         this.toElasticIndexConverter = toElasticIndexConverter;
     }

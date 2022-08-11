@@ -14,15 +14,15 @@ import java.time.Duration;
 import java.util.Arrays;
 
 @SpringBootApplication
-@ComponentScan("com.twitter")
+//@ComponentScan("com.twitter.elastic")
 public class KafkaToElasticApp implements CommandLineRunner {
     private static final Logger LOG = LoggerFactory.getLogger(KafkaToElasticApp.class);
 
-    private final KafkaAdminClient kafkaAdminClient;
+//    private final KafkaAdminClient kafkaAdminClient;
 
-    public KafkaToElasticApp(KafkaAdminClient kafkaAdminClient) {
-        this.kafkaAdminClient = kafkaAdminClient;
-    }
+//    public KafkaToElasticApp(KafkaAdminClient kafkaAdminClient) {
+//        this.kafkaAdminClient = kafkaAdminClient;
+//    }
 
     public static void main(String[] args) {
         SpringApplication.run(KafkaToElasticApp.class);
@@ -30,10 +30,10 @@ public class KafkaToElasticApp implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        while (!kafkaAdminClient.isTopicsCreated()){
-            Thread.sleep(Duration.ofSeconds(5).toMillis());
-        }
-        LOG.info("The kafka to elastic application is starting up...");
+//        while (!kafkaAdminClient.isTopicsCreated()){
+//            Thread.sleep(Duration.ofSeconds(5).toMillis());
+//        }
+//        LOG.info("The kafka to elastic application is starting up...");
     }
 
     @EventListener
