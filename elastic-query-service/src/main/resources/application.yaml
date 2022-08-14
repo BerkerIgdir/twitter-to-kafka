@@ -1,5 +1,5 @@
 encrypt:
-  key: berkerBaBa5
+  key: ${CONFIG_CLIENT_KEY}
 spring:
   application:
     name: elastic-query-service
