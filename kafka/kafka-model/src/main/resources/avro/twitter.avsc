@@ -5,6 +5,30 @@
     {"name": "userId", "type": "long"},
     {"name": "id", "type": "long"},
     {"name": "text", "type": ["null", "string"]},
-    {"name": "createdAt", "type": ["null", "long"], "logicalType": ["null", "date"]}
+    {"name": "createdAt", "type": ["null", "long"], "logicalType": ["null", "date"]},
+    {"name": "users",
+                "type": {
+                    "type": "array",
+                    "items":{
+                        "name": "User",
+                        "type": "record",
+                        "fields":[
+                            {   "name": "userName",
+                                "type": "string",
+                                "default":"empty user name"
+                            },
+                            {   "name": "name",
+                                "type": "string",
+                                "default":"empty name"
+
+                            },
+                            {   "name": "id",
+                                "type": "long"
+                            }
+                        ]
+                    }
+
+                }
+            }
   ]
 }

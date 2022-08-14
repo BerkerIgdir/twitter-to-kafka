@@ -8,6 +8,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Document(indexName = "#{@elasticSearchConfigProperties.indexName}")
 public class TwitterIndexModel implements Serializable {
@@ -18,6 +19,7 @@ public class TwitterIndexModel implements Serializable {
     @JsonProperty
     private String text;
 
+    private List<KafkaToElasticDTO.ElasticUserDto> users;
     public TwitterIndexModel() {
     }
 

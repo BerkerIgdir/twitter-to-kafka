@@ -1,7 +1,5 @@
 package com.twitter.app.streamcreator.apiconnector.impl;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -10,6 +8,7 @@ import com.twitter.app.config.TwitterToKafkaProperties;
 import com.twitter.app.kafka.avro.model.TwitterAvroModel;
 import com.twitter.app.streamcreator.apiconnector.TwitterApiStreamConnector;
 import com.twitter.app.converter.DtoToAvroTransformer;
+import com.twitter.app.streamcreator.apiconnector.dto.TwitterApiDTO;
 import com.twitter.kafka.producer.TwitterToKafkaProducer;
 import io.netty.channel.ChannelOption;
 import org.slf4j.Logger;
@@ -28,9 +27,9 @@ import reactor.netty.http.client.HttpClient;
 import java.net.URI;
 import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.twitter.app.streamcreator.apiconnector.TwitterApiConstants.*;
@@ -39,19 +38,10 @@ import static com.twitter.app.streamcreator.apiconnector.TwitterApiConstants.*;
 @Profile("dev")
 public class TwitterApiStreamConnectorImpl implements TwitterApiStreamConnector {
     private static final Logger LOG = LoggerFactory.getLogger(TwitterApiStreamConnectorImpl.class);
-
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public record TwitterDto(@JsonProperty("id") long id, @JsonProperty("author_id") long userId,
-                             @JsonProperty("created_at") String created_at, @JsonProperty("text") String text) {
-    }
-
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public record DataDto(TwitterDto data) {
-    }
-
-    private final DataDto JACKSON_FAIL_DTO_RESPONSE = new DataDto(new TwitterDto(Long.MAX_VALUE, Long.MAX_VALUE,
+    private final TwitterApiDTO.DataDto JACKSON_FAIL_DTO_RESPONSE = new TwitterApiDTO.DataDto(new TwitterApiDTO.TwitterDto(Long.MAX_VALUE, Long.MAX_VALUE,
             Instant.now().atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ISO_INSTANT),
-            "Empty Text"));
+            "Empty Text"),
+            new TwitterApiDTO.IncludedDto(List.of(new TwitterApiDTO.UserDto(Long.MAX_VALUE,"failed conversion","failed conversion"))));
 
     private final ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
     private final TwitterToKafkaProperties properties;
@@ -59,9 +49,9 @@ public class TwitterApiStreamConnectorImpl implements TwitterApiStreamConnector 
     private final WebClient webClient;
     private final TwitterToKafkaProducer<Long, TwitterAvroModel> kafkaProducer;
 
-    private final DtoToAvroTransformer<TwitterAvroModel, DataDto> dataDtoDtoToAvroTransformer;
+    private final DtoToAvroTransformer<TwitterAvroModel, TwitterApiDTO.DataDto> dataDtoDtoToAvroTransformer;
 
-    public TwitterApiStreamConnectorImpl(TwitterToKafkaProperties properties, KafkaConfigProperties kafkaConfigData, WebClient.Builder webClientBuilder, TwitterToKafkaProducer<Long, TwitterAvroModel> kafkaProducer, DtoToAvroTransformer<TwitterAvroModel, DataDto> dataDtoDtoToAvroTransformer) {
+    public TwitterApiStreamConnectorImpl(TwitterToKafkaProperties properties, KafkaConfigProperties kafkaConfigData, WebClient.Builder webClientBuilder, TwitterToKafkaProducer<Long, TwitterAvroModel> kafkaProducer, DtoToAvroTransformer<TwitterAvroModel, TwitterApiDTO.DataDto> dataDtoDtoToAvroTransformer) {
         this.properties = properties;
         this.kafkaConfigData = kafkaConfigData;
         this.kafkaProducer = kafkaProducer;
@@ -88,12 +78,12 @@ public class TwitterApiStreamConnectorImpl implements TwitterApiStreamConnector 
                 .onStatus(HttpStatus::is4xxClientError, ClientResponse::createException)
                 .bodyToFlux(String.class)
                 .map(this::fromStringToDTO)
-                .subscribe(dto -> kafkaProducer.send(topicName, dto.data().id, dataDtoDtoToAvroTransformer.transform(dto)));
+                .subscribe(dto -> kafkaProducer.send(topicName, dto.data().id(), dataDtoDtoToAvroTransformer.transform(dto)));
     }
 
-    private DataDto fromStringToDTO(String str) {
+    private TwitterApiDTO.DataDto fromStringToDTO(String str) {
         try {
-            return objectMapper.readValue(str, DataDto.class);
+            return objectMapper.readValue(str, TwitterApiDTO.DataDto.class);
         } catch (JsonProcessingException e) {
             LOG.info("the string can not be converted is:{}", str);
             return JACKSON_FAIL_DTO_RESPONSE;

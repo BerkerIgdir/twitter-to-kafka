@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class TwitterAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -2038488704746504435L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"TwitterAvroModel\",\"namespace\":\"com.twitter.app.kafka.avro.model\",\"fields\":[{\"name\":\"userId\",\"type\":\"long\"},{\"name\":\"id\",\"type\":\"long\"},{\"name\":\"text\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"createdAt\",\"type\":[\"null\",\"long\"],\"logicalType\":[\"null\",\"date\"]}]}");
+  private static final long serialVersionUID = 8128295000667919871L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"TwitterAvroModel\",\"namespace\":\"com.twitter.app.kafka.avro.model\",\"fields\":[{\"name\":\"userId\",\"type\":\"long\"},{\"name\":\"id\",\"type\":\"long\"},{\"name\":\"text\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"createdAt\",\"type\":[\"null\",\"long\"],\"logicalType\":[\"null\",\"date\"]},{\"name\":\"users\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"User\",\"fields\":[{\"name\":\"userName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"empty user name\"},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"empty name\"},{\"name\":\"id\",\"type\":\"long\"}]}}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -75,6 +75,7 @@ public class TwitterAvroModel extends org.apache.avro.specific.SpecificRecordBas
    private long id;
    private java.lang.String text;
    private java.lang.Long createdAt;
+   private java.util.List<com.twitter.app.kafka.avro.model.User> users;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -89,12 +90,14 @@ public class TwitterAvroModel extends org.apache.avro.specific.SpecificRecordBas
    * @param id The new value for id
    * @param text The new value for text
    * @param createdAt The new value for createdAt
+   * @param users The new value for users
    */
-  public TwitterAvroModel(java.lang.Long userId, java.lang.Long id, java.lang.String text, java.lang.Long createdAt) {
+  public TwitterAvroModel(java.lang.Long userId, java.lang.Long id, java.lang.String text, java.lang.Long createdAt, java.util.List<com.twitter.app.kafka.avro.model.User> users) {
     this.userId = userId;
     this.id = id;
     this.text = text;
     this.createdAt = createdAt;
+    this.users = users;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -106,6 +109,7 @@ public class TwitterAvroModel extends org.apache.avro.specific.SpecificRecordBas
     case 1: return id;
     case 2: return text;
     case 3: return createdAt;
+    case 4: return users;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -118,6 +122,7 @@ public class TwitterAvroModel extends org.apache.avro.specific.SpecificRecordBas
     case 1: id = (java.lang.Long)value$; break;
     case 2: text = value$ != null ? value$.toString() : null; break;
     case 3: createdAt = (java.lang.Long)value$; break;
+    case 4: users = (java.util.List<com.twitter.app.kafka.avro.model.User>)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -191,6 +196,23 @@ public class TwitterAvroModel extends org.apache.avro.specific.SpecificRecordBas
   }
 
   /**
+   * Gets the value of the 'users' field.
+   * @return The value of the 'users' field.
+   */
+  public java.util.List<com.twitter.app.kafka.avro.model.User> getUsers() {
+    return users;
+  }
+
+
+  /**
+   * Sets the value of the 'users' field.
+   * @param value the value to set.
+   */
+  public void setUsers(java.util.List<com.twitter.app.kafka.avro.model.User> value) {
+    this.users = value;
+  }
+
+  /**
    * Creates a new TwitterAvroModel RecordBuilder.
    * @return A new TwitterAvroModel RecordBuilder
    */
@@ -235,6 +257,7 @@ public class TwitterAvroModel extends org.apache.avro.specific.SpecificRecordBas
     private long id;
     private java.lang.String text;
     private java.lang.Long createdAt;
+    private java.util.List<com.twitter.app.kafka.avro.model.User> users;
 
     /** Creates a new Builder */
     private Builder() {
@@ -263,6 +286,10 @@ public class TwitterAvroModel extends org.apache.avro.specific.SpecificRecordBas
         this.createdAt = data().deepCopy(fields()[3].schema(), other.createdAt);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
+      if (isValidValue(fields()[4], other.users)) {
+        this.users = data().deepCopy(fields()[4].schema(), other.users);
+        fieldSetFlags()[4] = other.fieldSetFlags()[4];
+      }
     }
 
     /**
@@ -286,6 +313,10 @@ public class TwitterAvroModel extends org.apache.avro.specific.SpecificRecordBas
       if (isValidValue(fields()[3], other.createdAt)) {
         this.createdAt = data().deepCopy(fields()[3].schema(), other.createdAt);
         fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.users)) {
+        this.users = data().deepCopy(fields()[4].schema(), other.users);
+        fieldSetFlags()[4] = true;
       }
     }
 
@@ -447,6 +478,46 @@ public class TwitterAvroModel extends org.apache.avro.specific.SpecificRecordBas
       return this;
     }
 
+    /**
+      * Gets the value of the 'users' field.
+      * @return The value.
+      */
+    public java.util.List<com.twitter.app.kafka.avro.model.User> getUsers() {
+      return users;
+    }
+
+
+    /**
+      * Sets the value of the 'users' field.
+      * @param value The value of 'users'.
+      * @return This builder.
+      */
+    public com.twitter.app.kafka.avro.model.TwitterAvroModel.Builder setUsers(java.util.List<com.twitter.app.kafka.avro.model.User> value) {
+      validate(fields()[4], value);
+      this.users = value;
+      fieldSetFlags()[4] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'users' field has been set.
+      * @return True if the 'users' field has been set, false otherwise.
+      */
+    public boolean hasUsers() {
+      return fieldSetFlags()[4];
+    }
+
+
+    /**
+      * Clears the value of the 'users' field.
+      * @return This builder.
+      */
+    public com.twitter.app.kafka.avro.model.TwitterAvroModel.Builder clearUsers() {
+      users = null;
+      fieldSetFlags()[4] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public TwitterAvroModel build() {
@@ -456,6 +527,7 @@ public class TwitterAvroModel extends org.apache.avro.specific.SpecificRecordBas
         record.id = fieldSetFlags()[1] ? this.id : (java.lang.Long) defaultValue(fields()[1]);
         record.text = fieldSetFlags()[2] ? this.text : (java.lang.String) defaultValue(fields()[2]);
         record.createdAt = fieldSetFlags()[3] ? this.createdAt : (java.lang.Long) defaultValue(fields()[3]);
+        record.users = fieldSetFlags()[4] ? this.users : (java.util.List<com.twitter.app.kafka.avro.model.User>) defaultValue(fields()[4]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -508,6 +580,19 @@ public class TwitterAvroModel extends org.apache.avro.specific.SpecificRecordBas
       out.writeLong(this.createdAt);
     }
 
+    long size0 = this.users.size();
+    out.writeArrayStart();
+    out.setItemCount(size0);
+    long actualSize0 = 0;
+    for (com.twitter.app.kafka.avro.model.User e0: this.users) {
+      actualSize0++;
+      out.startItem();
+      e0.customEncode(out);
+    }
+    out.writeArrayEnd();
+    if (actualSize0 != size0)
+      throw new java.util.ConcurrentModificationException("Array-size written was " + size0 + ", but element count was " + actualSize0 + ".");
+
   }
 
   @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
@@ -533,8 +618,26 @@ public class TwitterAvroModel extends org.apache.avro.specific.SpecificRecordBas
         this.createdAt = in.readLong();
       }
 
+      long size0 = in.readArrayStart();
+      java.util.List<com.twitter.app.kafka.avro.model.User> a0 = this.users;
+      if (a0 == null) {
+        a0 = new SpecificData.Array<com.twitter.app.kafka.avro.model.User>((int)size0, SCHEMA$.getField("users").schema());
+        this.users = a0;
+      } else a0.clear();
+      SpecificData.Array<com.twitter.app.kafka.avro.model.User> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<com.twitter.app.kafka.avro.model.User>)a0 : null);
+      for ( ; 0 < size0; size0 = in.arrayNext()) {
+        for ( ; size0 != 0; size0--) {
+          com.twitter.app.kafka.avro.model.User e0 = (ga0 != null ? ga0.peek() : null);
+          if (e0 == null) {
+            e0 = new com.twitter.app.kafka.avro.model.User();
+          }
+          e0.customDecode(in);
+          a0.add(e0);
+        }
+      }
+
     } else {
-      for (int i = 0; i < 4; i++) {
+      for (int i = 0; i < 5; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.userId = in.readLong();
@@ -559,6 +662,26 @@ public class TwitterAvroModel extends org.apache.avro.specific.SpecificRecordBas
             this.createdAt = null;
           } else {
             this.createdAt = in.readLong();
+          }
+          break;
+
+        case 4:
+          long size0 = in.readArrayStart();
+          java.util.List<com.twitter.app.kafka.avro.model.User> a0 = this.users;
+          if (a0 == null) {
+            a0 = new SpecificData.Array<com.twitter.app.kafka.avro.model.User>((int)size0, SCHEMA$.getField("users").schema());
+            this.users = a0;
+          } else a0.clear();
+          SpecificData.Array<com.twitter.app.kafka.avro.model.User> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<com.twitter.app.kafka.avro.model.User>)a0 : null);
+          for ( ; 0 < size0; size0 = in.arrayNext()) {
+            for ( ; size0 != 0; size0--) {
+              com.twitter.app.kafka.avro.model.User e0 = (ga0 != null ? ga0.peek() : null);
+              if (e0 == null) {
+                e0 = new com.twitter.app.kafka.avro.model.User();
+              }
+              e0.customDecode(in);
+              a0.add(e0);
+            }
           }
           break;
 
