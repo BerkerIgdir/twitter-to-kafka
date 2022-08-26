@@ -1,5 +1,5 @@
 encrypt:
-  key: ${CONFIG_CLIENT_KEY}
+  key: berkerBaBa5
 spring:
   application:
     name: elastic-query-service
@@ -12,3 +12,5 @@ spring:
       name: elastic-query-service
       username: spring_cloud_user
       password: "{cipher}b070010b6ea5ff61dd83f4013184f73251e5d16ace7ef627faae5fe7c81f2b90"
+server:
+  port: 8789
